@@ -45,17 +45,17 @@ class Tokens:
         
     def get (self, line, col):
         """gets a token's value """
-        return self.array[6 - line][col - 1]
+        return self.array[LINE_NB - line][col - 1]
         
     def set_token(self, line, col, color):
         """sets a token's value for a given line and column"""
-        self.array[6 - line][col - 1] = color
+        self.array[LINE_NB - line][col - 1] = color
         
             
     def set_col(self, col, color):
         """sets a token's value for a given column (figures the line itself)"""
         # check if valid column
-        if self.get(6, col) != EMPTY:
+        if self.get(LINE_NB, col) != EMPTY:
             return False
         
         # set the right  token
@@ -91,21 +91,23 @@ class Tokens:
                 row.append((line, col))
             rows.append(row)
         # diagonal rows (bottom left to top right)
-        for line in range(-2, 4):
+        for line in range(-COL_NB+4, LINE_NB-2):
             row = []
             for col in range(1, COL_NB + 1):
                 observed_line = line + col - 1
-                if (observed_line >= 1) and (observed_line <= 6):
+                if (observed_line >= 1) and (observed_line <= LINE_NB) and (col >= 1) and (col <= COL_NB):
                     row.append((observed_line, col))
-            rows.append(row)
+            if len(row) >= 4 : 
+                rows.append(row)
         # diagonal rows (from top left to bottom right)
-        for line in range(-2, 4):
+        for line in range(-COL_NB+5, LINE_NB-2):
             row = []
             for col in range(1, COL_NB + 1):
-                observed_line = line - col + 7
-                if (observed_line >= 1) and (observed_line <= 6):
+                observed_line = line - col + COL_NB 
+                if (observed_line >= 1) and (observed_line <= LINE_NB) and (col >= 1) and (col <= COL_NB):
                     row.append((observed_line, col))
-            rows.append(row)
+            if len(row) >= 4 : 
+                rows.append(row)
         
         return rows
     
@@ -341,6 +343,15 @@ def test():
     
     display.end()
     
+def test_rows():
+    tokens = Tokens()
+    
+    for row in tokens.get_rows():
+        display.play(tokens, "", True, row)
+
+    display.end()
 
 main()
 #test()
+
+#test_rows()
