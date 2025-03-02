@@ -99,4 +99,7 @@ def pywer4():
 def defqult():
     return "A voir: <a href='pywer4'>Pywer4</a>"
 
+#%%
 
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')

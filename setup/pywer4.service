@@ -1,0 +1,13 @@
+[Unit]
+Description=uWSGI instance to serve pywer4
+After=network.target
+
+[Service]
+User=glg
+Group=www-data
+WorkingDirectory=/home/glg/dev/pywer4
+Environment="PATH=/home/glg/dev/pywer4/.env/bin"
+ExecStart=/home/glg/dev/pywer4/.env/bin/uwsgi --ini pywer4.ini
+
+[Install]
+WantedBy=multi-user.target
