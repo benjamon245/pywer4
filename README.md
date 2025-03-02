@@ -8,6 +8,9 @@ Power 4 game developped in Python:
 
 ![pywer4 screenshot](./pywer4.png)
 
+# Web version
+
+Now available at [gkcb.fr/pywer4](gkcb.fr/pywer4) (when the server is up)
 
 
 
