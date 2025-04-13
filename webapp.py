@@ -6,13 +6,11 @@ Created on Sun Jul 14 10:33:15 2024
 @author: glg
 """
 
-from flask import Flask, request
+from flask import Flask, request, redirect, url_for
 
-
-
-
-app = Flask(__name__, 
-            static_url_path='/', 
+ROOT_URL = "pywer4"
+app = Flask(__name__,
+            static_url_path=f"/{ROOT_URL}/",
             static_folder='static')
 # --> http://127.0.0.1:5000/test/ouahh.html
 
@@ -73,7 +71,7 @@ user_input = {"state":state,
 #%%
 
 
-@app.route("/user_play", methods=['POST'])
+@app.route(f"/{ROOT_URL}/user_play", methods=['POST'])
 def web_user_play():
     #print(request.form)
     user_input_json = request.form['parameter']
@@ -82,7 +80,7 @@ def web_user_play():
     #print(user_input)
     return user_play(user_input)
 
-@app.route("/computer_play", methods=['POST'])
+@app.route(f"/{ROOT_URL}/computer_play", methods=['POST'])
 def web_computer_play():
     #print(request.form)
     state_json = request.form['parameter']
@@ -91,13 +89,14 @@ def web_computer_play():
     #print(state)
     return computer_play(state)
 
-@app.route('/pywer4')
+@app.route(f"/{ROOT_URL}")
 def pywer4():
     return app.send_static_file('pywer4.html')
 
 @app.route('/')
-def defqult():
-    return "A voir: <a href='pywer4'>Pywer4</a>"
+def default():
+    return redirect(url_for(ROOT_URL))
+    #return "A voir: <a href='pywer4'>Pywer4</a>"
 
 #%%
 

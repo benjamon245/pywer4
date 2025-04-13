@@ -1,10 +1,11 @@
-# create WSGI service
+### create WSGI service ###
 
 sudo cp pywer4.service /etc/systemd/system/
 sudo sudo systemctl start pywer4
 sudo systemctl enable pywer4
+## give o+x access to parent directories of the socket
 
-# configuring nginx
+### configuring nginx ###
 
 sudo apt install nginx
 sudo cp nginx.conf /etc/nginx/sites-available/pywer4
@@ -13,8 +14,12 @@ sudo nginx -t
 sudo systemctl restart nginx
 sudo ufw allow 'Nginx Full'
 
-# securing with certbot
+### securing with certbot ###
 
+# tarball and copy the /etc/letsencrypt directory
+
+
+# the first time
 # install with apt or install with snapd as recommended
 sudo add-apt-repository ppa:certbot/certbot
 sudo apt install python3-certbot-nginx

@@ -1,3 +1,4 @@
+const ROOT_URL = "pywer4"
 let level = 3
 let nblines = 6
 let nbcols = 7
@@ -82,7 +83,7 @@ function cell_click() {
 
                 // remote call to check user move
                 user_input_json = JSON.stringify(user_input)
-                $.post("/user_play",
+                $.post(`/${ROOT_URL}/user_play`,
                     {parameter: user_input_json},
                     function (data, status) {
 
@@ -109,7 +110,7 @@ function cell_click() {
                                 // Remote call to get computer move
                                 state_json = JSON.stringify(state)
                                 $("#message").html("une seconde : l'ordinateur réfléchit");
-                                $.post("/computer_play",
+                                $.post(`/${ROOT_URL}/computer_play`,
                                     {parameter: state_json},
                                     function (data, status) {
                                         // Applying computer move
@@ -120,7 +121,7 @@ function cell_click() {
                                             grid_lock = false
                                             $("#message").html("A toi de jouer !");
                                         } else if (data["computer_win"]) { // If the computer won
-                                            $("#message").html("<p win='computer'>Looser !</p>")
+                                            $("#message").html("<p win='computer'>Loser !</p>")
                                             // Highlight winning tokens
                                             data["squares"].forEach(
                                                 function (elt) {

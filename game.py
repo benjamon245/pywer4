@@ -77,7 +77,7 @@ def main():
                 winner, squares = tokens.win(color = RED)
                 if winner:
                     print("Red wins")
-                    text = "Looser"
+                    text = "Loser"
 
                     break
                 # checks if the board is full (Tie)
